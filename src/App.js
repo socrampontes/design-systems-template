@@ -1,5 +1,8 @@
+import { ChakraProvider , Flex } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import  {Card}  from "./components/card";
+import { wrap } from "framer-motion";
 
 export default function App() {
   const [users, setUsers] = useState([]);
@@ -20,11 +23,20 @@ export default function App() {
       console.log(error);
     }
   };
+  
 
   return (
     <>
-      <h1>Me apague quando for iniciar!</h1>
-      <p>Chame o Card aqui!</p>
+      <ChakraProvider >
+        <Flex wrap={'wrap'} gap={6} justify={"center"}>
+        {users.map((users,id)=>{
+          return(
+
+            <Card key={id} users={users.name}/>
+          )
+        })}
+        </Flex >
+      </ChakraProvider>
     </>
   );
 }
